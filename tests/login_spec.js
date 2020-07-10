@@ -1,46 +1,38 @@
 const userName = 'Luke';
 const userPassword = 'Skywalker'
+const expectedPageTitle = 'CafeTownsend-AngularJS-Rails';
+
+let loginPage = require('../page_objects/login_page.js');
+let pageAfterLoggingIn = require('../page_objects/page_after_logging_in.js');
 
 describe('CafeTownsend-AngularJS-Rails First Test', function() {
     it('website should have expected title', function() {      
-      browser.manage().window().maximize();
-      browser.get('http://cafetownsend-angular-rails.herokuapp.com/login');  
-      
-      expect(browser.getTitle()).toEqual('CafeTownsend-AngularJS-Rails');
+      loginPage.get();
+      loginPage.hasCorrectTitle(expectedPageTitle);      
     });
 
-    it('Before fill out login form, \"Login\" button is disabled', function() {
-      var loginButtonEnabled = $('[type="submit"]').getAttribute('ng-disabled');      
-      
-      expect(loginButtonEnabled).toEqual('true');      
+    it('Before fill out login form, \"Login\" button is disabled', function() {      
+      loginPage.isLoginButtonDisabled();      
     });
 
     it('User can enter login', function() {
-      var userNameInput = element(by.model('user.name'));
-
-      userNameInput.sendKeys(userName);
-      
-      expect(userNameInput.getAttribute('value')).toEqual(userName);      
+      loginPage.enterUserName(userName);  
+      loginPage.isInputValueCorrect(userNameInput, userName)            
     });
 
-    it('user can enter password', function() {
-      var userPasswordInput = element(by.model('user.password'));
-
-      userPasswordInput.sendKeys(userPassword);
-      
-      expect(userPasswordInput.getAttribute('value')).toEqual(userPassword);     
+    it('User can enter password', function() {
+      loginPage.enterUserPassword(userPassword);     
+      loginPage.isInputValueCorrect(userPasswordInput, userPassword);     
     });
 
-    it('user can log in', function() {     
-      $('[type="submit"]').click();
+    it('User can log in', function() {     
+      loginPage.clickLogin();
 
-      var greetings = element(by.id('greetings'));
-
-      expect(greetings.isPresent()).toBe(true);
-      expect(greetings.getText()).toEqual('Hello ' + userName);
+      pageAfterLoggingIn.isGreetingsDisplayed();
+      pageAfterLoggingIn.hasGreetingsCorrectText(userName);      
     });
 
     it('user can log out', function() {            
-      $('[ng-click="logout()"]').click();      
+      pageAfterLoggingIn.logOut();            
     });
   });
