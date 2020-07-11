@@ -6,7 +6,7 @@ let loginPage = require('../page_objects/login_page.js');
 let pageAfterLoggingIn = require('../page_objects/page_after_logging_in.js');
 
 describe('CafeTownsend-AngularJS-Rails First Test', function() {
-    it('website should have expected title', function() {      
+    it('Website should have expected title', function() {      
       loginPage.get();
       loginPage.hasCorrectTitle(expectedPageTitle);      
     });
@@ -32,7 +32,7 @@ describe('CafeTownsend-AngularJS-Rails First Test', function() {
       pageAfterLoggingIn.hasGreetingsCorrectText(userName);      
     });
 
-    it('user can log out', function() {            
+    it('User can log out', function() {            
       pageAfterLoggingIn.logOut();            
     });
   });
