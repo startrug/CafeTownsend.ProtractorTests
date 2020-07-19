@@ -1,2 +1,4 @@
 /.git
-/reports
+/.vscode
+/allure-results
+/allure-report

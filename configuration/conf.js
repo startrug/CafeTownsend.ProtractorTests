@@ -1,10 +1,5 @@
 var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
-var reporter = new HtmlScreenshotReporter({
-  dest: 'reports/screenshots_and_reports',
-  filename: 'test_report.html'
-});
-
 exports.config = {
     //seleniumAddress: 'http://localhost:4444/wd/hub',
     directConnect: true,
@@ -16,26 +11,24 @@ exports.config = {
     suites: {
       login_tests: '../tests/login_spec.js'      
     },    
-    framework: 'jasmine',
-
-    // Setup the report before any tests start
-    beforeLaunch: function() {
-      return new Promise(function(resolve){
-        reporter.beforeLaunch(resolve);
-      });
-    },
-
-    // Assign the test reporter to each running instance
-    onPrepare: function() {
-      jasmine.getEnv().addReporter(reporter);
+    framework: 'jasmine', 
+    
+    onPrepare: function() {      
       browser.manage().window().maximize();
-      browser.manage().timeouts().implicitlyWait(5000);
-    },
+      browser.manage().timeouts().implicitlyWait(5000);      
 
-    // Close the report after all tests finish
-    afterLaunch: function(exitCode) {
-      return new Promise(function(resolve){
-        reporter.afterLaunch(resolve.bind(this, exitCode));
-      });
-    }
+      var AllureReporter = require('jasmine-allure-reporter');
+      jasmine.getEnv().addReporter(new AllureReporter({
+      resultsDir: '../allure-results'
+      }));
+      
+      jasmine.getEnv().afterEach(function(done){
+      browser.takeScreenshot().then(function (png) {
+        allure.createAttachment('Screenshot', function () {
+          return new Buffer(png, 'base64')
+        }, 'image/png')();
+        done();
+      })
+    });
+    }    
   }
