@@ -4,7 +4,7 @@ exports.config = {
     rootElement: '*[ng-app]',
     specs: [
       '../tests/login_spec.js', 
-      '../tests/logged_in.js'
+      '../tests/logged_in_spec.js'
     ],        
     capabilities: {
       'browserName': 'chrome'
@@ -13,7 +13,7 @@ exports.config = {
       login_tests: '../tests/login_spec.js',
       logged_in_tests: '../logged_in.js'      
     },    
-    framework: 'jasmine', 
+    framework: 'jasmine',        
     
     onPrepare: function() {      
       browser.manage().window().maximize();

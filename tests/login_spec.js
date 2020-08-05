@@ -1,38 +1,27 @@
-const userName = 'Luke';
-const userPassword = 'Skywalker'
-const expectedPageTitle = 'CafeTownsend-AngularJS-Rails';
-
 let loginPage = require('../page_objects/login_page.js');
-let pageAfterLoggingIn = require('../page_objects/page_after_logging_in.js');
+let data = require('../data/test_data.json')
 
-describe('CafeTownsend-AngularJS-Rails First Test', function() {
+describe('Login to CafeTownsend-AngularJS-Rails', function() {
     it('Website should have expected title', function() {      
       loginPage.get();
-      loginPage.hasCorrectTitle(expectedPageTitle);      
+      loginPage.hasCorrectTitle(data.page.title);      
     });
 
     it('Before fill out login form, \"Login\" button is disabled', function() {      
-      loginPage.isLoginButtonDisabled();      
+      expect(loginPage.isLoginButtonDisabled()).toEqual('true');      
     });
 
     it('User can enter login', function() {
-      loginPage.enterUserName(userName);  
-      loginPage.isInputValueCorrect(userNameInput, userName)            
+      loginPage.enterUserName(data.user.name);  
+      loginPage.isInputValueCorrect(userNameInput, data.user.name)            
     });
 
     it('User can enter password', function() {
-      loginPage.enterUserPassword(userPassword);     
-      loginPage.isInputValueCorrect(userPasswordInput, userPassword);     
+      loginPage.enterUserPassword(data.user.password);     
+      loginPage.isInputValueCorrect(userPasswordInput, data.user.password);     
     });
 
-    it('User can log in', function() {     
-      loginPage.clickLogin();
-
-      pageAfterLoggingIn.isGreetingsDisplayed();
-      pageAfterLoggingIn.hasGreetingsCorrectText(userName);      
-    });
-
-    it('User can log out', function() {            
-      pageAfterLoggingIn.logOut();            
-    });
+    it('After entering credentials login button is enabled', function() {     
+      expect(loginPage.isLoginButtonDisabled()).toEqual('false');
+    });    
   });

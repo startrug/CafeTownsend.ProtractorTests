@@ -1,3 +1,5 @@
+let data = require('../data/test_data.json')
+
 let LoginPage = function() {     
     let loginButton = $('[type="submit"]');    
   
@@ -6,7 +8,7 @@ let LoginPage = function() {
     };
 
     this.get = function() {       
-        browser.get('http://cafetownsend-angular-rails.herokuapp.com/login');        
+        browser.get(data.page.url);        
     };
     
     this.hasCorrectTitle = function(expectedTitle) {
@@ -24,8 +26,8 @@ let LoginPage = function() {
     };
 
     this.isLoginButtonDisabled = function() {
-        return expect(loginButton.getAttribute('ng-disabled')).toEqual('true');
-    };
+        return loginButton.getAttribute('ng-disabled');
+    };    
 
     this.isInputValueCorrect = function(inputName, value) {
         return expect(inputName.getAttribute('value')).toEqual(value);
