@@ -2,12 +2,16 @@ exports.config = {
     //seleniumAddress: 'http://localhost:4444/wd/hub',
     directConnect: true,
     rootElement: '*[ng-app]',
-    specs: ['../tests/login_spec.js'],    
+    specs: [
+      '../tests/login_spec.js', 
+      '../tests/logged_in.js'
+    ],        
     capabilities: {
       'browserName': 'chrome'
     },
     suites: {
-      login_tests: '../tests/login_spec.js'      
+      login_tests: '../tests/login_spec.js',
+      logged_in_tests: '../logged_in.js'      
     },    
     framework: 'jasmine', 
     
