@@ -1,4 +1,4 @@
-let PageAfterLoggingIn = function() {    
+let EmployeesPage = function() {    
     let greetings = $('[id="greetings"]');
     let logOutButton = $('[ng-click="logout()"]')
 
@@ -15,4 +15,4 @@ let PageAfterLoggingIn = function() {
     }
 }
 
-module.exports = new PageAfterLoggingIn();
+module.exports = new EmployeesPage();
