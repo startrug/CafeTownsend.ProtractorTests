@@ -1,7 +1,8 @@
 let data = require('../data/test_data.json')
 
 let LoginPage = function() {     
-    let loginButton = $('[type="submit"]');    
+    let loginButton = $('[type="submit"]');
+    let formLocator = $('form[name="loginForm"]');    
   
     this.title = function() {
         return browser.getTitle();
@@ -36,7 +37,11 @@ let LoginPage = function() {
     this.clickLogin = function() {
         loginButton.click();
         browser.sleep(2000);        
-    };    
+    };
+    
+    this.isLoginFormOpened = function() {
+        return expect(formLocator.isPresent()).toBe(true);
+    }
   };  
 
   module.exports = new LoginPage();
