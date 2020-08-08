@@ -1,0 +1,10 @@
+{
+    "page": {
+        "url": "http://cafetownsend-angular-rails.herokuapp.com/login",
+        "title": "CafeTownsend-AngularJS-Rails"
+    },
+    "user": {
+        "name": "Luke",
+        "password": "Skywalker"
+    }      
+} 
