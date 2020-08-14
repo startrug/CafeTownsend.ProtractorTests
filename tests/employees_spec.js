@@ -1,6 +1,6 @@
 let loginForm = require('../page_objects/login_form.js');
 let employeesList = require('../page_objects/employees_list.js');
-let data = require('../data/test_data.json');
+let users = require('../data/users.json');
 
 describe('Open employees list page', function() {
   beforeAll(() => {
@@ -9,7 +9,7 @@ describe('Open employees list page', function() {
     
   it('Is greetings displayed after logging in', function() {  
     employeesList.isGreetingsDisplayed();
-    employeesList.hasGreetingsCorrectText(data.user.name);      
+    employeesList.hasGreetingsCorrectText(users.admin.name);      
   });
 
   it('Is employees list displayed', function() {  
