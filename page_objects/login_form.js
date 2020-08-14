@@ -1,6 +1,7 @@
-let data = require('../data/test_data.json')
+let pageInfo = require('../data/page_info.json')
+let users = require('../data/users.json')
 
-let LoginPage = function() {     
+let LoginForm = function() {     
     let loginButton = $('[type="submit"]');
     let formLocator = $('form[name="loginForm"]');    
   
@@ -9,7 +10,7 @@ let LoginPage = function() {
     };
 
     this.get = function() {       
-        browser.get(data.page.url);        
+        browser.get(pageInfo.url);        
     };
     
     this.hasCorrectTitle = function(expectedTitle) {
@@ -42,6 +43,13 @@ let LoginPage = function() {
     this.isLoginFormOpened = function() {
         return expect(formLocator.isPresent()).toBe(true);
     }
+
+    this.logInAsAdmin = function() {
+        this.get();
+        this.enterUserName(users.admin.name);
+        this.enterUserPassword(users.admin.password);
+        this.clickLogin();
+    }
   };  
 
-  module.exports = new LoginPage();
+  module.exports = new LoginForm();

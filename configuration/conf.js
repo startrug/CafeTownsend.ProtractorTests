@@ -4,14 +4,16 @@ exports.config = {
     rootElement: '*[ng-app]',
     specs: [
       '../tests/login_spec.js', 
-      '../tests/employees_spec.js'
+      '../tests/employees_spec.js',
+      '../tests/add_employee_spec.js',
     ],        
     capabilities: {
       'browserName': 'chrome'
     },
     suites: {
       login_tests: '../tests/login_spec.js',
-      logged_in_tests: '../tests/employees_spec.js'      
+      logged_in_tests: '../tests/employees_spec.js',
+      create_employee_tests: '../tests/add_employee_spec.js'   
     },    
     framework: 'jasmine',        
     

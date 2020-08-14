@@ -1,4 +1,4 @@
-let EmployeesPage = function() {    
+let EmployeesList = function() {    
     let greetings = $('[id="greetings"]');
     let logOutButton = $('[ng-click="logout()"]');
     let createButton = $('[ng-click="createEmployee()"]');
@@ -36,4 +36,4 @@ let EmployeesPage = function() {
     }
 }
 
-module.exports = new EmployeesPage();
+module.exports = new EmployeesList();
