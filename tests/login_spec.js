@@ -1,27 +1,28 @@
-let loginPage = require('../page_objects/login_page.js');
-let data = require('../data/test_data.json')
+let loginForm = require('../page_objects/login_form.js');
+let users = require('../data/users.json');
+let pageInfo = require('../data/page_info.json');
 
 describe('Open page and fill out login form', function() {
     it('Website should have expected title', function() {      
-      loginPage.get();
-      loginPage.hasCorrectTitle(data.page.title);      
+      loginForm.get();
+      loginForm.hasCorrectTitle(pageInfo.title);      
     });
 
     it('Before fill out login form, \"Login\" button is disabled', function() {      
-      expect(loginPage.isLoginButtonDisabled()).toEqual('true');      
+      expect(loginForm.isLoginButtonDisabled()).toEqual('true');      
     });
 
     it('Set correct user login', function() {
-      loginPage.enterUserName(data.user.name);  
-      loginPage.isInputValueCorrect(userNameInput, data.user.name)            
+      loginForm.enterUserName(users.admin.name);  
+      loginForm.isInputValueCorrect(userNameInput, users.admin.name)            
     });
 
     it('Set correct user password', function() {
-      loginPage.enterUserPassword(data.user.password);     
-      loginPage.isInputValueCorrect(userPasswordInput, data.user.password);     
+      loginForm.enterUserPassword(users.admin.password);     
+      loginForm.isInputValueCorrect(userPasswordInput, users.admin.password);     
     });
 
     it('After entering credentials login button is enabled', function() {     
-      expect(loginPage.isLoginButtonDisabled()).toEqual('false');
+      expect(loginForm.isLoginButtonDisabled()).toEqual('false');
     });    
   });
