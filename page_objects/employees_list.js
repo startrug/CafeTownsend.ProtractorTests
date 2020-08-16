@@ -1,3 +1,5 @@
+let EC = protractor.ExpectedConditions;
+
 let EmployeesList = function() {
     let greetings = $('[id="greetings"]');
     let logOutButton = $('[ng-click="logout()"]');
@@ -35,9 +37,33 @@ let EmployeesList = function() {
         logOutButton.click();
     };
 
-    this.checkIfEmployeeAdded = function(name) {
+    this.checkIfListContainsEmployeeName = function(name) {
         let employeesList = element.all(by.repeater('employee in employees'));
         expect(employeesList.getText()).toContain(name);
+    };
+
+    this.checkIfListDoesNotContainEmployeeName = function(name) {
+        let employeesList = element.all(by.repeater('employee in employees'));
+        expect(employeesList.getText()).not.toContain(name);
+    };
+
+    this.selectEmployee = function(name) {
+        let employeeToDelete = element(by.cssContainingText('.ng-binding', name));
+        employeeToDelete.click();
+    };
+
+    this.clickDelete = function() {
+        $('#bDelete').click();
+    };
+
+    this.CheckIfAlertContainsExpectedText = function(alert, employeeName) {
+        expect(alert.getText()).toEqual('Are you sure you want to delete '.concat(employeeName, '?'));
+    };
+
+    this.waitForAlertAndGetIt = function() {
+        browser.wait(EC.alertIsPresent(), 5000);
+
+        return browser.switchTo().alert();
     };
 }
 

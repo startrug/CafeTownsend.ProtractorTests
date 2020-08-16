@@ -1,3 +1,5 @@
+let commonActions = require('../helpers/common_methods.js');
+
 let EmployeeForm = function() {
     let formLocator = $('form[name="employeeForm"]');
 
@@ -23,6 +25,24 @@ let EmployeeForm = function() {
 
     this.isFormOpened = function() {
         return expect(formLocator.isPresent()).toBe(true);
+    };
+
+    this.fillOutForm = function(firstName, lastName, startDate, email) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setStartDate(startDate);
+        this.setEmail(email);
+    };
+
+    this.checkFormData = function(firstName, lastName, startDate, email) {
+        commonActions.isInputValueCorrect(firstNameInput, firstName);
+        commonActions.isInputValueCorrect(lastNameInput, lastName);
+        commonActions.isInputValueCorrect(startDateInput, startDate);
+        commonActions.isInputValueCorrect(emailInput, email);
+    };
+
+    this.clickCancel = function() {
+        $('.bCancel').click();
     };
 }
 
