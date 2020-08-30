@@ -2,5 +2,9 @@
     "admin": {
         "name": "Luke",
         "password": "Skywalker"
+    },
+    "guest": {
+        "name": "Guest",
+        "password": "Test1234"
     }
 }
