@@ -39,11 +39,12 @@ let fullName = createEmployeeFullName(employeeToDelete.firstName, employeeToDele
 ```
 - [page_objects](page_objects) - page objects into which the has been divided. Some instructions for basic usage Page Object pattern in Protractor you can find here: [protractortest.org/#/page-objects](https://www.protractortest.org/#/page-objects)
 - [tests](tests) -  sets of tests for main functionalities of application. Tests have been divided for 4 specs:
-  - logging in to app: ([login_spec.js](tests/login_spec.js)),
+  - logging in to app:
+    - [login_spec.js](tests/login_spec.js),
   - functionalities of employees list:
-    - ([employees_spec.js](tests/employees_spec.js),
+    - [employees_spec.js](tests/employees_spec.js),
     - [add_employee_spec.js](tests/add_employee_spec.js),
-    - [delete_employee_spec.js](tests/delete_employee_spec.js))
+    - [delete_employee_spec.js](tests/delete_employee_spec.js)
 
 ## Project features
 - framework follows page object pattern
@@ -71,4 +72,4 @@ allure serve
 Report will be generated in few seconds and opened in your default browser.
 
 ## What's next?
-This simple, training project is still developing. I want to add more scenarios and test cases and refactor a bit existing code and maybe modify project structure :)
+This simple, training project is still developing. I want to add more scenarios and test cases and refactor a bit existing code and maybe modify project structure :blush:
