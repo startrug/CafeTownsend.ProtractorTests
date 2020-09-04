@@ -27,28 +27,48 @@ this.logInAsAdmin = function() {
   Notice: the code above is a part of [login_form.js](page_objects/login_form.js). Go to this file for more details.
 
 - [helpers](helpers) - in this directory I stored reusable parts of code to avoid its duplication. There are some methods using in many places, so I decided to place them in [common_methods.js](helpers/common_methods.js). You can import all common methods or one of them and assign it to variable like in examples:
-[-] example of import all common methods and using one of them
+example of import all common methods and using one of them
 ```
 let commonActions = require('../helpers/common_methods.js');
 expect(commonActions.isSubmitButtonDisabled()).toEqual('true');
 ```
-[-] example of import selected method and using it
+example of import selected method and using it
 ```
 let createEmployeeFullName = require('../helpers/common_methods').createEmployeeFullName;
 let fullName = createEmployeeFullName(employeeToDelete.firstName, employeeToDelete.lastName);
 ```
 - [page_objects](page_objects) - page objects into which the has been divided. Some instructions for basic usage Page Object pattern in Protractor you can find here: [protractortest.org/#/page-objects](https://www.protractortest.org/#/page-objects)
 - [tests](tests) -  sets of tests for main functionalities of application. Tests have been divided for 4 specs:
-[-] logging in to app ([login_spec.js](tests/login_spec.js)),
-[-] functionalities of employees list ([employees_spec.js](tests/employees_spec.js), [add_employee_spec.js](tests/add_employee_spec.js), [delete_employee_spec.js](tests/delete_employee_spec.js))
+  - logging in to app: ([login_spec.js](tests/login_spec.js)),
+  - functionalities of employees list:
+    - ([employees_spec.js](tests/employees_spec.js),
+    - [add_employee_spec.js](tests/add_employee_spec.js),
+    - [delete_employee_spec.js](tests/delete_employee_spec.js))
 
 ## Project features
+- framework follows page object pattern
+- data-driven tests - test data is loading from json files (see: [Project structure](README.md#Project-structure))
+- easy to generating and attractive reports in Allure
 
 ## Getting started
 Basic informations about Protractor setup, configuration and writing first test are availaible here: [protractor.org](https://www.protractortest.org/#/)
 
 ## Running tests
+For run all tests just open command line in /configuration directory and type command:
+```
+protractor conf.js
+```
+If you want to run specific suites of tests you can use command:
+```
+protractor conf.js --suite login_tests, create_employee_tests
+```
 
 ## Generating reports
+After tests run allure-results directory should be saved in main project catalog. For genereting Allure report just open command line in main project directory and use command:
+```
+allure serve
+```
+Report will be generated in few seconds and opened in your default browser.
 
 ## What's next?
+This simple, training project is still developing. I want to add more scenarios and test cases and refactor a bit existing code and maybe modify project structure :)
