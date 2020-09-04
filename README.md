@@ -70,6 +70,8 @@ After tests run allure-results directory should be saved in main project catalog
 allure serve
 ```
 Report will be generated in few seconds and opened in your default browser.
+The tests report might look like this:
+![Allure report screenshot](https://raw.githubusercontent.com/startrug/CafeTownsend.ProtractorTests/readme_screenshots/sample_report.png
 
 ## What's next?
 This simple, training project is still developing. I want to add more scenarios and test cases and refactor a bit existing code and maybe modify project structure :blush:
