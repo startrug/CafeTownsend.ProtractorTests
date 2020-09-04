@@ -1,4 +1,5 @@
 ![Last commit](https://img.shields.io/github/last-commit/startrug/CafeTownsend.ProtractorTests?color=9cf&logo=git)
+![GitHub top language](https://img.shields.io/github/languages/top/startrug/CafeTownsend.ProtractorTests?color=blue)
 
 # Protractor e2e tests training project
 
