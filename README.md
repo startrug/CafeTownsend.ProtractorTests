@@ -1,3 +1,5 @@
+![Last commit](https://img.shields.io/github/last-commit/startrug/CafeTownsend.ProtractorTests?color=9cf&logo=git)
+
 # Protractor e2e tests training project
 
 This is my first automated testing project using JS and Protractor framework. I prepared some test scenarios for Angular app availaible here: [cafetownsend-angular-rails.herokuapp.com](http://cafetownsend-angular-rails.herokuapp.com).
