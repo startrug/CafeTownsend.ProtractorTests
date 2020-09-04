@@ -42,7 +42,7 @@ describe('Delete selected employee', function() {
         loginForm.logInAsAdmin();
     });
 
-      it('Check if list does not contsin employee name', function() {
+      it('Check if list does not contain employee name', function() {
         employeesList.checkIfListDoesNotContainEmployeeName(fullName);
       });
   });
