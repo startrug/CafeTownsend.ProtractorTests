@@ -49,7 +49,7 @@ let fullName = createEmployeeFullName(employeeToDelete.firstName, employeeToDele
 ## Project features
 - framework follows page object pattern
 - data-driven tests - test data is loading from json files (see: [Project structure](README.md#Project-structure))
-- easy to generating and attractive reports in Allure
+- easy to generating and attractive reports in Allure with screenshots and nice charts
 
 ## Getting started
 Basic informations about Protractor setup, configuration and writing first test are availaible here: [protractor.org](https://www.protractortest.org/#/)
@@ -70,8 +70,9 @@ After tests run allure-results directory should be saved in main project catalog
 allure serve
 ```
 Report will be generated in few seconds and opened in your default browser.
+
 The tests report might look like this:
-![Allure report screenshot](https://github.com/startrug/CafeTownsend.ProtractorTests/blob/Add_readme/readme_screenshots/sample_report.png?raw=true)
+![Allure report screenshot](https://github.com/startrug/CafeTownsend.ProtractorTests/blob/master/readme_screenshots/sample_report.png?raw=true)
 
 ## What's next?
 This simple, training project is still developing. I want to add more scenarios and test cases and refactor a bit existing code and maybe modify project structure :blush:
