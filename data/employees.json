@@ -16,5 +16,11 @@
         "lastName": "Sobieszczacki",
         "startDate":"2020-09-01",
         "email": "ziemsob@kmail.com"
+    },
+    {
+        "firstName": "Zuzanna",
+        "lastName": "Marcinkowska",
+        "startDate":"2020-09-02",
+        "email": "zuzanna.marcinkowska@h2o.pl"
     }
 ]
