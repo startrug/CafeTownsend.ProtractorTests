@@ -10,5 +10,11 @@
         "lastName": "Wodzislawski",
         "startDate": "2010-01-06",
         "email": "mieczo@gomail.pl"
+    },
+    {
+        "firstName": "Ziemowit",
+        "lastName": "Sobieszczacki",
+        "startDate":"2020-09-01",
+        "email": "ziemsob@kmail.com"
     }
 ]

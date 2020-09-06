@@ -12,10 +12,11 @@ exports.config = {
       'browserName': 'chrome'
     },
     suites: {
-      login_tests: '../tests/login_spec.js',
-      logged_in_tests: '../tests/employees_spec.js',
-      create_employee_tests: '../tests/add_employee_spec.js',
-      delete_employee: '../tests/delete_employee_spec.js'
+      login: '../tests/login_spec.js',
+      employees_list: '../tests/employees_spec.js',
+      create_employee: '../tests/add_employee_spec.js',
+      delete_employee: '../tests/delete_employee_spec.js',
+      edit_employee: '../tests/edit_employee_spec.js',
     },
     framework: 'jasmine',
 

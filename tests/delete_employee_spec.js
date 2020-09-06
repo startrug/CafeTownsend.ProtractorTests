@@ -10,11 +10,12 @@ describe('Delete selected employee', function() {
         loginForm.logInAsAdmin();
     });
 
-    it('Select employee to delete', function() {
-        employeesList.selectEmployee(fullName);
+    it('If no employee is selected, \"Delete\" button is disabled', function() {
+        employeesList.isDeleteButtonDisabled();
     });
 
     it('Cancel removing employee', function() {
+        employeesList.selectEmployee(fullName);
         employeesList.clickDelete();
 
         let alert = employeesList.waitForAlertAndGetIt();

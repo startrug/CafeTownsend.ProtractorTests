@@ -44,6 +44,10 @@ let EmployeeForm = function() {
     this.clickCancel = function() {
         $('.bCancel').click();
     };
+
+    this.clickBack = function() {
+        $('.bBack').click();
+    }
 }
 
 module.exports = new EmployeeForm();
