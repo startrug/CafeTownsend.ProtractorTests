@@ -2,10 +2,8 @@ let EC = protractor.ExpectedConditions;
 
 let EmployeesList = function() {
     let greetings = $('[id="greetings"]');
-    let logOutButton = $('[ng-click="logout()"]');
-    let createButton = $('[ng-click="createEmployee()"]');
-    let editButton = $('[ng-click="editEmployee()"]');
-    let deleteButton = $('[ng-click="deleteEmployee()"]');
+    let editButton = $('#bEdit');
+    let deleteButton = $('#bDelete');
 
     this.isGreetingsDisplayed = function() {
         return expect(greetings.isPresent()).toBe(true);
@@ -16,11 +14,11 @@ let EmployeesList = function() {
     };
 
     this.isEditButtonDisabled = function() {
-        return expect(editButton.getAttribute('ng-class')).toContain('disabled');
+        return expect(editButton.getAttribute('class')).toContain('disabled');
     };
 
     this.isDeleteButtonDisabled = function() {
-        return expect(deleteButton.getAttribute('ng-class')).toContain('disabled');
+        return expect(deleteButton.getAttribute('class')).toContain('disabled');
     };
 
     this.isEmployeesListDisplayed = function() {
@@ -30,11 +28,11 @@ let EmployeesList = function() {
     };
 
     this.clickCreate = function() {
-        createButton.click();
+        $('#bAdd').click();
     };
 
     this.logOut = function() {
-        logOutButton.click();
+        $('[ng-click="logout()"]').click();
     };
 
     this.checkIfListContainsEmployeeName = function(name) {
@@ -53,7 +51,11 @@ let EmployeesList = function() {
     };
 
     this.clickDelete = function() {
-        $('#bDelete').click();
+        deleteButton.click();
+    };
+
+    this.clickEdit = function() {
+        editButton.click();
     };
 
     this.CheckIfAlertContainsExpectedText = function(alert, employeeName) {

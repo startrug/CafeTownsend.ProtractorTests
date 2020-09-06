@@ -44,6 +44,18 @@ let EmployeeForm = function() {
     this.clickCancel = function() {
         $('.bCancel').click();
     };
+
+    this.clickBack = function() {
+        $('.bBack').click();
+    };
+
+    this.updateFormData = function(firstName, lastName, startDate, email) {
+        let inputs = [firstNameInput, lastNameInput, startDateInput, emailInput];
+        inputs.forEach(i => {
+            i.clear();
+        });
+        this.fillOutForm(firstName, lastName, startDate, email);
+    }
 }
 
 module.exports = new EmployeeForm();
