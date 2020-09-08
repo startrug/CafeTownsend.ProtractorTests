@@ -23,7 +23,7 @@ let EmployeeForm = function() {
         emailInput.sendKeys(email);
     };
 
-    this.isFormOpened = function() {
+    this.isOpened = function() {
         return expect(formLocator.isPresent()).toBe(true);
     };
 
