@@ -8,7 +8,7 @@ let common_methods = require('../helpers/common_methods');
 let employeeToEditFullName = common_methods.createEmployeeFullName(employeeToEdit.firstName, employeeToEdit.lastName);
 let updatedEmployeeFullName = common_methods.createEmployeeFullName(updatedEmployee.firstName, updatedEmployee.lastName);
 
-describe('Employee edit tests', () => {
+describe('Employee edit tests: ', () => {
     beforeAll(() => {
       loginForm.logInAsAdmin();
     });
@@ -46,13 +46,28 @@ describe('Employee edit tests', () => {
       })
     });
 
+    describe('When random input field is empty', () => {
+      beforeAll(() => {
+        employeesList.selectEmployee(employeeToEditFullName);
+        employeesList.clickEdit();
+        employeeForm.clearRandomInputData();
+      });
+      afterAll(() => {
+        employeeForm.clickBack();
+      });
+      it('Then clicking update has no effect', () => {
+        common_methods.submitForm()
+        employeeForm.isOpened();
+      });
+    });
+
     describe('When the employee to edit has been selected and employee form has been updated', () => {
       beforeAll(() => {
         employeesList.selectEmployee(employeeToEditFullName);
         employeesList.clickEdit();
         employeeForm.updateFormData(updatedEmployee.firstName, updatedEmployee.lastName, updatedEmployee.startDate, updatedEmployee.email);
       });
-      it('The input fields should contain correct data', () => {
+      it('Then input fields should contain correct data', () => {
         employeeForm.checkFormData(updatedEmployee.firstName, updatedEmployee.lastName, updatedEmployee.startDate, updatedEmployee.email);
       });
     });
@@ -68,7 +83,4 @@ describe('Employee edit tests', () => {
         employeesList.checkIfListDoesNotContainEmployeeName(employeeToEditFullName);
       });
     });
-
-    // TODO
-    //it('When employee form is not completed, then clicking update has no effect', function() {});
   });
