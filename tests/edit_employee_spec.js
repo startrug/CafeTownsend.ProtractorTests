@@ -32,8 +32,7 @@ describe('Employee edit tests: ', () => {
         employeesList.clickCreate();
         employeeForm.fillOutForm(employeeToEdit.firstName, employeeToEdit.lastName, employeeToEdit.startDate, employeeToEdit.email);
         common_methods.submitForm();
-        employeesList.selectEmployee(employeeToEditFullName);
-        employeesList.clickEdit();
+        selectEmployeeAndEdit(employeeToEditFullName);
       });
       afterAll(() => {
         employeeForm.clickBack();
@@ -48,8 +47,7 @@ describe('Employee edit tests: ', () => {
 
     describe('When random input field is empty', () => {
       beforeAll(() => {
-        employeesList.selectEmployee(employeeToEditFullName);
-        employeesList.clickEdit();
+        selectEmployeeAndEdit(employeeToEditFullName);
         employeeForm.clearRandomInputData();
       });
       afterAll(() => {
@@ -61,10 +59,23 @@ describe('Employee edit tests: ', () => {
       });
     });
 
+    describe('When updated email has no correct format', () => {
+      beforeAll(() => {
+        selectEmployeeAndEdit(employeeToEditFullName);
+        employeeForm.updateEmail('abc123');
+      });
+      afterAll(() => {
+        employeeForm.clickBack();
+      });
+      it('Then clicking update has no effect', () => {
+        common_methods.submitForm();
+        employeeForm.isOpened();
+      });
+    });
+
     describe('When the employee to edit has been selected and employee form has been updated', () => {
       beforeAll(() => {
-        employeesList.selectEmployee(employeeToEditFullName);
-        employeesList.clickEdit();
+        selectEmployeeAndEdit(employeeToEditFullName);
         employeeForm.updateFormData(updatedEmployee.firstName, updatedEmployee.lastName, updatedEmployee.startDate, updatedEmployee.email);
       });
       it('Then input fields should contain correct data', () => {
@@ -84,3 +95,8 @@ describe('Employee edit tests: ', () => {
       });
     });
   });
+
+  function selectEmployeeAndEdit(name) {
+    employeesList.selectEmployee(name);
+    employeesList.clickEdit();
+  }

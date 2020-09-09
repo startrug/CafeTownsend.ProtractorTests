@@ -49,12 +49,17 @@ function EmployeeForm() {
         $('.bBack').click();
     };
 
-    this.updateFormData = (firstName, lastName, startDate, email) => {
+    this.updateFormData = (newFirstName, newLastName, newStartDate, newEmail) => {
         let inputs = [firstNameInput, lastNameInput, startDateInput, emailInput];
         inputs.forEach(i => {
             i.clear();
         });
-        this.fillOutForm(firstName, lastName, startDate, email);
+        this.fillOutForm(newFirstName, newLastName, newStartDate, newEmail);
+    };
+
+    this.updateEmail = (newEmail) => {
+        emailInput.clear();
+        this.setEmail(newEmail);
     };
 
     this.clearRandomInputData = () => {
