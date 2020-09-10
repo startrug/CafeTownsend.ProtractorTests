@@ -8,7 +8,7 @@ let common_methods = require('../helpers/common_methods');
 let employeeToEditFullName = common_methods.createEmployeeFullName(employeeToEdit.firstName, employeeToEdit.lastName);
 let updatedEmployeeFullName = common_methods.createEmployeeFullName(updatedEmployee.firstName, updatedEmployee.lastName);
 
-describe('Edit employee', function() {
+describe('Employee edit tests: ', () => {
     beforeAll(() => {
       loginForm.logInAsAdmin();
     });
@@ -18,40 +18,85 @@ describe('Edit employee', function() {
       employeesList.clickDelete();
       let alert = employeesList.waitForAlertAndGetIt();
       alert.accept();
-      employeesList.checkIfListDoesNotContainEmployeeName(updatedEmployeeFullName);
       employeesList.logOut();
     });
 
-    it('If no employee is selected, \"Edit\" button is disabled', function() {
-      employeesList.isEditButtonDisabled();
+    describe('When admin is logged in and no employee is selected', () => {
+      it('Then \"Edit\" button should be disabled', () => {
+        employeesList.isEditButtonDisabled();
+      });
     });
 
-    it('Create employee to delete', function() {
-      employeesList.clickCreate();
-      employeeForm.fillOutForm(employeeToEdit.firstName, employeeToEdit.lastName, employeeToEdit.startDate, employeeToEdit.email);
-      common_methods.submitForm();
+    describe('When new employee has been created and \"Edit\" button has been clicked', () => {
+      beforeAll(() => {
+        employeesList.clickCreate();
+        employeeForm.fillOutForm(employeeToEdit.firstName, employeeToEdit.lastName, employeeToEdit.startDate, employeeToEdit.email);
+        common_methods.submitForm();
+        selectEmployeeAndEdit(employeeToEditFullName);
+      });
+      afterAll(() => {
+        employeeForm.clickBack();
+      });
+      it('Then employee form is opened', () => {
+        employeeForm.isOpened();
+      });
+      it('Then correct data in inputs should be displayed', () => {
+        employeeForm.checkFormData(employeeToEdit.firstName, employeeToEdit.lastName, employeeToEdit.startDate, employeeToEdit.email);
+      })
     });
 
-    it('If edit form is opened, correct data in inputs should be displayed', function() {
-      employeesList.selectEmployee(employeeToEditFullName);
-      employeesList.clickEdit();
-      employeeForm.checkFormData(employeeToEdit.firstName, employeeToEdit.lastName, employeeToEdit.startDate, employeeToEdit.email);
-      employeeForm.clickBack();
+    describe('When random input field is empty', () => {
+      beforeAll(() => {
+        selectEmployeeAndEdit(employeeToEditFullName);
+        employeeForm.clearRandomInputData();
+      });
+      afterAll(() => {
+        employeeForm.clickBack();
+      });
+      it('Then clicking update has no effect', () => {
+        common_methods.submitForm()
+        employeeForm.isOpened();
+      });
     });
 
-    it('After updating form, correct data should be displayed', function() {
-      employeesList.selectEmployee(employeeToEditFullName);
-      employeesList.clickEdit();
-      employeeForm.updateFormData(updatedEmployee.firstName, updatedEmployee.lastName, updatedEmployee.startDate, updatedEmployee.email);
-      employeeForm.checkFormData(updatedEmployee.firstName, updatedEmployee.lastName, updatedEmployee.startDate, updatedEmployee.email);
-      common_methods.submitForm();
+    describe('When updated email has no correct format', () => {
+      beforeAll(() => {
+        selectEmployeeAndEdit(employeeToEditFullName);
+        employeeForm.updateEmail('abc123');
+      });
+      afterAll(() => {
+        employeeForm.clickBack();
+      });
+      it('Then clicking update has no effect', () => {
+        common_methods.submitForm();
+        employeeForm.isOpened();
+      });
     });
 
-    it('After submitting form, updated employee name should be visible on the list', function() {
-      employeesList.checkIfListContainsEmployeeName(updatedEmployeeFullName);
+    describe('When the employee to edit has been selected and employee form has been updated', () => {
+      beforeAll(() => {
+        selectEmployeeAndEdit(employeeToEditFullName);
+        employeeForm.updateFormData(updatedEmployee.firstName, updatedEmployee.lastName, updatedEmployee.startDate, updatedEmployee.email);
+      });
+      it('Then input fields should contain correct data', () => {
+        employeeForm.checkFormData(updatedEmployee.firstName, updatedEmployee.lastName, updatedEmployee.startDate, updatedEmployee.email);
+      });
     });
 
-    it('After submitting form, edited employee name should not be visible on the list', function() {
-      employeesList.checkIfListDoesNotContainEmployeeName(employeeToEditFullName);
+    describe('When the employee form has been updated correctly and submitted', () => {
+      beforeAll(() => {
+        common_methods.submitForm();
+      });
+      it('Then updated employee name should be visible on the list', () => {
+        employeesList.checkIfListContainsEmployeeName(updatedEmployeeFullName);
+      });
+      it('Then previous employee name should not be visible on the list', () => {
+        employeesList.checkIfListDoesNotContainEmployeeName(employeeToEditFullName);
+      });
     });
   });
+
+  function selectEmployeeAndEdit(name) {
+    employeesList.selectEmployee(name);
+    employeesList.clickEdit();
+  }

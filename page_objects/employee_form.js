@@ -1,61 +1,72 @@
 let commonActions = require('../helpers/common_methods.js');
 
-let EmployeeForm = function() {
+function EmployeeForm() {
     let formLocator = $('form[name="employeeForm"]');
 
-    this.setFirstName = function(firstName) {
+    this.setFirstName = (firstName) => {
         firstNameInput = element(by.model('selectedEmployee.firstName'));
         firstNameInput.sendKeys(firstName);
     };
 
-    this.setLastName = function(lastName) {
+    this.setLastName = (lastName) => {
         lastNameInput = element(by.model('selectedEmployee.lastName'));
         lastNameInput.sendKeys(lastName);
     };
 
-    this.setStartDate = function(date) {
+    this.setStartDate = (date) => {
         startDateInput = element(by.model('selectedEmployee.startDate'));
         startDateInput.sendKeys(date);
     };
 
-    this.setEmail = function(email) {
+    this.setEmail = (email) => {
         emailInput = element(by.model('selectedEmployee.email'));
         emailInput.sendKeys(email);
     };
 
-    this.isFormOpened = function() {
+    this.isOpened = () => {
         return expect(formLocator.isPresent()).toBe(true);
     };
 
-    this.fillOutForm = function(firstName, lastName, startDate, email) {
+    this.fillOutForm = (firstName, lastName, startDate, email) => {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setStartDate(startDate);
         this.setEmail(email);
     };
 
-    this.checkFormData = function(firstName, lastName, startDate, email) {
+    this.checkFormData = (firstName, lastName, startDate, email) => {
         commonActions.isInputValueCorrect(firstNameInput, firstName);
         commonActions.isInputValueCorrect(lastNameInput, lastName);
         commonActions.isInputValueCorrect(startDateInput, startDate);
         commonActions.isInputValueCorrect(emailInput, email);
     };
 
-    this.clickCancel = function() {
+    this.clickCancel = () => {
         $('.bCancel').click();
     };
 
-    this.clickBack = function() {
+    this.clickBack = () => {
         $('.bBack').click();
     };
 
-    this.updateFormData = function(firstName, lastName, startDate, email) {
+    this.updateFormData = (newFirstName, newLastName, newStartDate, newEmail) => {
         let inputs = [firstNameInput, lastNameInput, startDateInput, emailInput];
         inputs.forEach(i => {
             i.clear();
         });
-        this.fillOutForm(firstName, lastName, startDate, email);
-    }
+        this.fillOutForm(newFirstName, newLastName, newStartDate, newEmail);
+    };
+
+    this.updateEmail = (newEmail) => {
+        emailInput.clear();
+        this.setEmail(newEmail);
+    };
+
+    this.clearRandomInputData = () => {
+        let inputs = [firstNameInput, lastNameInput, startDateInput, emailInput];
+        let randomInputIdx = Math.floor(Math.random() * inputs.length);
+        inputs[randomInputIdx].clear();
+    };
 }
 
 module.exports = new EmployeeForm();
