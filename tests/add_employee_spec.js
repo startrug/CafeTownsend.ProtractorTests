@@ -15,7 +15,7 @@ describe('Add new employee', function() {
 
     it('Open \"Create employee form\"', function() {
       employeesList.clickCreate();
-      employeeForm.isFormOpened();
+      employeeForm.isOpened();
     });
 
     it('Before filling out the form, submit button is disabled', function() {
