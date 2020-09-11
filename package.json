@@ -1,0 +1,24 @@
+{
+  "name": "CafeTownsend.ProtractorTests",
+  "version": "1.0.0",
+  "description": "![Last commit](https://img.shields.io/github/last-commit/startrug/CafeTownsend.ProtractorTests?color=9cf&logo=git)\r ![GitHub top language](https://img.shields.io/github/languages/top/startrug/CafeTownsend.ProtractorTests?color=blue)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tests": "protractor conf.js --suite login"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/startrug/CafeTownsend.ProtractorTests.git"
+  },
+  "keywords": ["protractor", "jasmine", "js", "automation", "tests"],
+  "author": "Artur Strug",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/startrug/CafeTownsend.ProtractorTests/issues"
+  },
+  "homepage": "https://github.com/startrug/CafeTownsend.ProtractorTests#readme"
+}

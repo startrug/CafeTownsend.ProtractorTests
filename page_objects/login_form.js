@@ -2,41 +2,34 @@ let pageUrl = require('../data/page_info.json').url;
 let admin = require('../data/users.json').admin;
 let submitForm = require('../helpers/common_methods.js').submitForm;
 
-let LoginForm = function() {
+function LoginForm() {
+    this.userNameInput = element(by.model('user.name'));
+    this.userPasswordInput = element(by.model('user.password'));
+
     let loginButton = $('[type="submit"]');
     let formLocator = $('form[name="loginForm"]');
+    let errorLocator = $('.error-message');
 
-    this.title = function() {
-        return browser.getTitle();
-    };
 
-    this.get = function() {
-        browser.get(pageUrl);
-    };
+    this.title = () => browser.getTitle();
 
-    this.hasCorrectTitle = function(expectedTitle) {
-        return expect(this.title()).toEqual(expectedTitle);
-    };
+    this.get = () => browser.get(pageUrl);
 
-    this.enterUserName = function(name) {
-        userNameInput = element(by.model('user.name'));
-        userNameInput.sendKeys(name);
-    };
+    this.hasCorrectTitle = (expectedTitle) => expect(this.title()).toEqual(expectedTitle);
 
-    this.enterUserPassword = function(password) {
-        userPasswordInput = element(by.model('user.password'));
-        userPasswordInput.sendKeys(password);
-    };
+    this.enterUserName = (name) => this.userNameInput.sendKeys(name);
 
-    this.isLoginButtonDisabled = function() {
-        return loginButton.getAttribute('ng-disabled');
-    };
+    this.enterUserPassword = (password) => this.userPasswordInput.sendKeys(password);
 
-    this.isLoginFormOpened = function() {
-        return expect(formLocator.isPresent()).toBe(true);
-    }
+    this.isLoginButtonDisabled = () => loginButton.getAttribute('ng-disabled');
 
-    this.logInAsAdmin = function() {
+    this.isLoginFormOpened = () => expect(formLocator.isPresent()).toBe(true);
+
+    this.isErrorMessageDisplayed = () => expect(errorLocator.isPresent()).toBe(true);
+
+    this.isTextOfErrorMessageCorrect = () => expect(errorLocator.getText()).toEqual('Invalid username or password!')
+
+    this.logInAsAdmin = () => {
         this.get();
         this.enterUserName(admin.name);
         this.enterUserPassword(admin.password);
