@@ -1,4 +1,4 @@
-let commonActions = require('../helpers/common_methods.js');
+let commonMethods = require('../helpers/common_methods.js');
 
 function EmployeeForm() {
     let formLocator = $('form[name="employeeForm"]');
@@ -25,10 +25,10 @@ function EmployeeForm() {
     };
 
     this.checkFormData = (firstName, lastName, startDate, email) => {
-        commonActions.isInputValueCorrect(firstNameInput, firstName);
-        commonActions.isInputValueCorrect(lastNameInput, lastName);
-        commonActions.isInputValueCorrect(startDateInput, startDate);
-        commonActions.isInputValueCorrect(emailInput, email);
+        commonMethods.isInputValueCorrect(firstNameInput, firstName);
+        commonMethods.isInputValueCorrect(lastNameInput, lastName);
+        commonMethods.isInputValueCorrect(startDateInput, startDate);
+        commonMethods.isInputValueCorrect(emailInput, email);
     };
 
     this.clickCancel = () => $('.bCancel').click();
