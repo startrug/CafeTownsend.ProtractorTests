@@ -59,14 +59,19 @@ let fullName = createEmployeeFullName(employeeToDelete.firstName, employeeToDele
 Basic informations about Protractor setup, configuration and writing first test are availaible here: [protractor.org](https://www.protractortest.org/#/)
 
 ## Running tests
-For run all tests just open command line in /configuration directory and type command:
+For run all tests just open command line in [configuration](configuration) directory and type command:
 ```
 protractor conf.js
 ```
 If you want to run specific suites of tests you can use command:
 ```
-protractor conf.js --suite login_tests, create_employee_tests
+protractor conf.js --suite login,add
 ```
+You can also run specific files containing tests by using command:
+```
+protractor conf.js --specs ../tests/add_employee_spec.js, ../tests/delete_employee_spec.js
+```
+Remember not to use spaces between comma and name of suite or file!
 
 ## Generating reports
 After tests run allure-results directory should be saved in main project catalog. For genereting Allure report just open command line in main project directory and use command:
@@ -80,3 +85,4 @@ The tests report might look like this:
 
 ## What's next?
 This simple, training project is still developing. I want to add more scenarios and test cases and refactor a bit existing code and maybe modify project structure :blush:
+EDIT: After many changes, fixes and code refactoring, I decided to leave this project in current state. Maybe I'll back to that with new ideas when I'll learn more about tests automation using JavaScript.

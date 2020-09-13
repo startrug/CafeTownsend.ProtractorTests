@@ -1,72 +1,60 @@
 let EC = protractor.ExpectedConditions;
 
-let EmployeesList = function() {
+function EmployeesList() {
     let greetings = $('[id="greetings"]');
     let editButton = $('#bEdit');
     let deleteButton = $('#bDelete');
 
-    this.isGreetingsDisplayed = function() {
-        return expect(greetings.isPresent()).toBe(true);
+    this.isGreetingsDisplayed = () => expect(greetings.isPresent()).toBe(true);
+
+    this.hasGreetingsCorrectText = (username) => expect(greetings.getText()).toEqual('Hello ' + username);
+
+    this.isEditButtonDisabled = () => expect(editButton.getAttribute('class')).toContain('disabled');
+
+    this.isDeleteButtonDisabled = () => expect(deleteButton.getAttribute('class')).toContain('disabled');
+
+    this.isEmployeesListDisplayed = () => expect(getEmployeesList().count()).not.toEqual(0);
+
+    this.clickCreate = () => $('#bAdd').click();
+
+    this.logOut = () => $('[ng-click="logout()"]').click();
+
+    this.clickEdit = () => editButton.click();
+
+    this.checkIfListContainsEmployeeName = (name) => expect(getEmployeesList().getText()).toContain(name);
+
+    this.checkIfListDoesNotContainEmployeeName = (name) => expect(getEmployeesList().getText()).not.toContain(name);
+
+    this.deleteSelectedEmployee = (name) => {
+        select(name);
+        clickDelete();
     };
 
-    this.hasGreetingsCorrectText = function(username) {
-        return expect(greetings.getText()).toEqual('Hello ' + username);
-    };
-
-    this.isEditButtonDisabled = function() {
-        return expect(editButton.getAttribute('class')).toContain('disabled');
-    };
-
-    this.isDeleteButtonDisabled = function() {
-        return expect(deleteButton.getAttribute('class')).toContain('disabled');
-    };
-
-    this.isEmployeesListDisplayed = function() {
-        let employeesList = element.all(by.repeater('employee in employees'));
-
-        return expect(employeesList.count()).not.toEqual(0);
-    };
-
-    this.clickCreate = function() {
-        $('#bAdd').click();
-    };
-
-    this.logOut = function() {
-        $('[ng-click="logout()"]').click();
-    };
-
-    this.checkIfListContainsEmployeeName = function(name) {
-        let employeesList = element.all(by.repeater('employee in employees'));
-        expect(employeesList.getText()).toContain(name);
-    };
-
-    this.checkIfListDoesNotContainEmployeeName = function(name) {
-        let employeesList = element.all(by.repeater('employee in employees'));
-        expect(employeesList.getText()).not.toContain(name);
-    };
-
-    this.selectEmployee = function(name) {
+    this.selectEmployee = (name) => {
         let employeeToDelete = element(by.cssContainingText('.ng-binding', name));
         employeeToDelete.click();
     };
 
-    this.clickDelete = function() {
-        deleteButton.click();
+    this.CheckIfAlertContainsExpectedText = (alert, employeeName) => {
+        expect(alert.getText())
+        .toEqual('Are you sure you want to delete '
+        .concat(employeeName, '?'));
     };
 
-    this.clickEdit = function() {
-        editButton.click();
-    };
-
-    this.CheckIfAlertContainsExpectedText = function(alert, employeeName) {
-        expect(alert.getText()).toEqual('Are you sure you want to delete '.concat(employeeName, '?'));
-    };
-
-    this.waitForAlertAndGetIt = function() {
+    this.waitForAlertAndGetIt = () => {
         browser.wait(EC.alertIsPresent(), 5000);
 
         return browser.switchTo().alert();
     };
+
+    function select(name) {
+        let employeeToDelete = element(by.cssContainingText('.ng-binding', name));
+        employeeToDelete.click();
+    }
+
+    clickDelete = () => deleteButton.click();
+
+    getEmployeesList = () => element.all(by.repeater('employee in employees'));
 }
 
 module.exports = new EmployeesList();
