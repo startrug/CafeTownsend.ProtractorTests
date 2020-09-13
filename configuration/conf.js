@@ -6,7 +6,8 @@ exports.config = {
       '../tests/login_spec.js',
       '../tests/employees_spec.js',
       '../tests/add_employee_spec.js',
-      '../tests/delete_employee_spec.js'
+      '../tests/delete_employee_spec.js',
+      '../tests/edit_employee_spec.js',
     ],
     capabilities: {
       'browserName': 'chrome'
@@ -16,7 +17,7 @@ exports.config = {
       list: '../tests/employees_spec.js',
       add: '../tests/add_employee_spec.js',
       delete: '../tests/delete_employee_spec.js',
-      edit: '../tests/edit_employee_spec.js',
+      edit: '../tests/edit_employee_spec.js'
     },
     framework: 'jasmine',
 

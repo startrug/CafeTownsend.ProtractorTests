@@ -13,44 +13,48 @@ function EmployeesList() {
 
     this.isDeleteButtonDisabled = () => expect(deleteButton.getAttribute('class')).toContain('disabled');
 
-    this.isEmployeesListDisplayed = () => {
-        let employeesList = element.all(by.repeater('employee in employees'));
-
-        return expect(employeesList.count()).not.toEqual(0);
-    };
+    this.isEmployeesListDisplayed = () => expect(getEmployeesList().count()).not.toEqual(0);
 
     this.clickCreate = () => $('#bAdd').click();
 
     this.logOut = () => $('[ng-click="logout()"]').click();
 
-    this.checkIfListContainsEmployeeName = function(name) {
-        let employeesList = element.all(by.repeater('employee in employees'));
-        expect(employeesList.getText()).toContain(name);
+    this.clickEdit = () => editButton.click();
+
+    this.checkIfListContainsEmployeeName = (name) => expect(getEmployeesList().getText()).toContain(name);
+
+    this.checkIfListDoesNotContainEmployeeName = (name) => expect(getEmployeesList().getText()).not.toContain(name);
+
+    this.deleteSelectedEmployee = (name) => {
+        select(name);
+        clickDelete();
     };
 
-    this.checkIfListDoesNotContainEmployeeName = function(name) {
-        let employeesList = element.all(by.repeater('employee in employees'));
-        expect(employeesList.getText()).not.toContain(name);
-    };
-
-    this.selectEmployee = function(name) {
+    this.selectEmployee = (name) => {
         let employeeToDelete = element(by.cssContainingText('.ng-binding', name));
         employeeToDelete.click();
     };
 
-    this.clickDelete = () => deleteButton.click();
-
-    this.clickEdit = () => editButton.click();
-
     this.CheckIfAlertContainsExpectedText = (alert, employeeName) => {
-        expect(alert.getText()).toEqual('Are you sure you want to delete '.concat(employeeName, '?'));
+        expect(alert.getText())
+        .toEqual('Are you sure you want to delete '
+        .concat(employeeName, '?'));
     };
 
-    this.waitForAlertAndGetIt = function() {
+    this.waitForAlertAndGetIt = () => {
         browser.wait(EC.alertIsPresent(), 5000);
 
         return browser.switchTo().alert();
     };
+
+    function select(name) {
+        let employeeToDelete = element(by.cssContainingText('.ng-binding', name));
+        employeeToDelete.click();
+    }
+
+    clickDelete = () => deleteButton.click();
+
+    getEmployeesList = () => element.all(by.repeater('employee in employees'));
 }
 
 module.exports = new EmployeesList();

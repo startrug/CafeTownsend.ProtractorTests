@@ -50,6 +50,13 @@ describe('When user filled out form and submit it', function() {
     commonMethods.submitForm();
   });
 
+  afterAll(() => {
+    employeesList.deleteSelectedEmployee(fullName1);
+    let alert = employeesList.waitForAlertAndGetIt();
+    alert.accept();
+    employeesList.logOut();
+  });
+
   it('then employees list should contain employee full name', function() {
     employeesList.checkIfListContainsEmployeeName(fullName1);
   });
